@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="010-create-employee-test-participation-table" author="you">
+        <createTable tableName="employee_test_participation">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="employee_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="test_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notes" type="TEXT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="employee_test_participation"
+                                 baseColumnNames="employee_id"
+                                 constraintName="fk_etp_employee"
+                                 referencedTableName="employee"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="employee_test_participation"
+                                 baseColumnNames="test_id"
+                                 constraintName="fk_etp_test"
+                                 referencedTableName="test"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

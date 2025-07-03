@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <include file="classpath:db/changelog/initial/01_create_organization_table.xml"/>
+    <include file="classpath:db/changelog/initial/02_create_location_table.xml"/>
+    <include file="classpath:db/changelog/initial/03_create_aircraft_type_table.xml"/>
+    <include file="classpath:db/changelog/initial/04_create_aircraft_table.xml"/>
+    <include file="classpath:db/changelog/initial/05_create_unit_table.xml"/>
+    <include file="classpath:db/changelog/initial/06_create_position_table.xml"/>
+    <include file="classpath:db/changelog/initial/07_create_employee_table.xml"/>
+    <include file="classpath:db/changelog/initial/08_create_employee_position_history_table.xml"/>
+    <include file="classpath:db/changelog/initial/09_create_test_table.xml"/>
+    <include file="classpath:db/changelog/initial/10_create_employee_test_participation_table.xml"/>
+
+</databaseChangeLog>
