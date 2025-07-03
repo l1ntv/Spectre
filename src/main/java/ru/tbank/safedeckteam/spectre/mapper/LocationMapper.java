@@ -6,4 +6,5 @@ import ru.tbank.safedeckteam.spectre.model.Location;
 
 @Mapper(componentModel = "spring")
 public interface LocationMapper extends Mappable<Location, LocationDTO> {
+
 }

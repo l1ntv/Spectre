@@ -27,19 +27,19 @@ public class AircraftController {
     }
 
     @PostMapping
-    public ResponseEntity<AircraftDTO> createAircraftType(@RequestBody CreatedAircraftDTO createdAircraftDTO) {
+    public ResponseEntity<AircraftDTO> createAircraft(@RequestBody CreatedAircraftDTO createdAircraftDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(aircraftService.createAircraft(createdAircraftDTO));
     }
 
-    @PatchMapping("/{aircraftId}")
-    public ResponseEntity<AircraftDTO> renamePosition(@RequestBody UpdatedAircraftDTO updatedAircraftDTO,
+    @PutMapping("/{aircraftId}")
+    public ResponseEntity<AircraftDTO> updateAircraft(@RequestBody UpdatedAircraftDTO updatedAircraftDTO,
                                                       @PathVariable Long aircraftId) {
         return ResponseEntity.ok(aircraftService.updateAircraft(updatedAircraftDTO, aircraftId));
     }
 
     @DeleteMapping("/{aircraftId}")
-    public ResponseEntity<AircraftDTO> deletePosition(@PathVariable Long aircraftId) {
+    public ResponseEntity<AircraftDTO> deleteAircraft(@PathVariable Long aircraftId) {
         return ResponseEntity.ok(aircraftService.deleteAircraft(aircraftId));
     }
 }

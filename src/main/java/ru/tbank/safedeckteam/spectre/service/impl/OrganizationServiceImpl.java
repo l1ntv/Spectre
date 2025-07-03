@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tbank.safedeckteam.spectre.dto.CreatedOrganizationDTO;
 import ru.tbank.safedeckteam.spectre.dto.OrganizationDTO;
 import ru.tbank.safedeckteam.spectre.dto.RenamedOrganizationDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.OrganizationMapper;
 import ru.tbank.safedeckteam.spectre.model.Organization;
 import ru.tbank.safedeckteam.spectre.repository.OrganizationRepository;
@@ -28,7 +29,7 @@ public class OrganizationServiceImpl implements OrganizationsService {
     @Override
     public OrganizationDTO findOrganizationById(Long id) {
         return organizationMapper.toDto(organizationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Organization not found")));
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found")));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class OrganizationServiceImpl implements OrganizationsService {
     @Override
     public OrganizationDTO renameOrganization(RenamedOrganizationDTO organization, Long organizationId) {
         Organization organizationEntity = organizationRepository.findById(organizationId)
-                .orElseThrow(() -> new RuntimeException("Organization not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found."));
         organizationEntity.setName(organization.getNewName());
         return organizationMapper.toDto(organizationRepository.save(organizationEntity));
     }
@@ -49,7 +50,7 @@ public class OrganizationServiceImpl implements OrganizationsService {
     @Override
     public OrganizationDTO deleteOrganization(Long organizationId) {
         Organization organizationEntity = organizationRepository.findById(organizationId)
-                .orElseThrow(() -> new RuntimeException("Organization not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found."));
         organizationRepository.delete(organizationEntity);
         return organizationMapper.toDto(organizationEntity);
     }

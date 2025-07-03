@@ -32,7 +32,7 @@ public class EmployeeController {
                 .body(employeeService.createEmployee(createdEmployeeDTO));
     }
 
-    @PatchMapping("/{employeeId}")
+    @PutMapping("/{employeeId}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody UpdatedEmployeeDTO updatedEmployeeDTO,
                                                       @PathVariable Long employeeId) {
         return ResponseEntity.ok(employeeService.updateEmployee(updatedEmployeeDTO, employeeId));

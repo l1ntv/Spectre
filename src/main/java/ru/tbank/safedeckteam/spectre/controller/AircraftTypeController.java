@@ -32,7 +32,7 @@ public class AircraftTypeController {
                 .body(aircraftTypeService.createAircraftType(createdAircraftTypeDTO));
     }
 
-    @PatchMapping("/{aircraftTypeId}")
+    @PutMapping("/{aircraftTypeId}")
     public ResponseEntity<AircraftTypeDTO> renamePosition(@RequestBody RenamedAircraftTypeDTO renamedAircraftTypeDTO,
                                                           @PathVariable Long aircraftTypeId) {
         return ResponseEntity.ok(aircraftTypeService.renameAircraftType(renamedAircraftTypeDTO, aircraftTypeId));

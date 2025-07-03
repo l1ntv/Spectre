@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tbank.safedeckteam.spectre.dto.AircraftDTO;
 import ru.tbank.safedeckteam.spectre.dto.CreatedAircraftDTO;
 import ru.tbank.safedeckteam.spectre.dto.UpdatedAircraftDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.AircraftMapper;
 import ru.tbank.safedeckteam.spectre.model.Aircraft;
 import ru.tbank.safedeckteam.spectre.repository.AircraftRepository;
@@ -31,7 +32,7 @@ public class AircraftServiceImpl implements AircraftService {
     @Override
     public AircraftDTO findAircraftById(Long id) {
         return aircraftMapper.toDto(aircraftRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft not found.")));
     }
 
     @Override
@@ -41,26 +42,26 @@ public class AircraftServiceImpl implements AircraftService {
                 .description(dto.getDescription())
                 .manufacturer(dto.getManufacturer())
                 .type(aircraftTypeRepository.findById(dto.getAircraftType().getId())
-                        .orElseThrow(() -> new RuntimeException("Aircraft type not found.")))
+                        .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found.")))
                 .build()));
     }
 
     @Override
     public AircraftDTO updateAircraft(UpdatedAircraftDTO dto, Long id) {
         Aircraft aircraft = aircraftRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft not found."));
         aircraft.setModelName(dto.getModelName());
         aircraft.setDescription(dto.getDescription());
         aircraft.setManufacturer(dto.getManufacturer());
         aircraft.setType(aircraftTypeRepository.findById(dto.getAircraftType().getId())
-                .orElseThrow(() -> new RuntimeException("Aircraft type not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found.")));
         return aircraftMapper.toDto(aircraftRepository.save(aircraft));
     }
 
     @Override
     public AircraftDTO deleteAircraft(Long id) {
         Aircraft aircraft = aircraftRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft not found."));
         aircraftRepository.delete(aircraft);
         return aircraftMapper.toDto(aircraft);
     }

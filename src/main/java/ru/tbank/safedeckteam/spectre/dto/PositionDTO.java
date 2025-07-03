@@ -8,5 +8,4 @@ public class PositionDTO {
     private Long id;
 
     private String title;
-
 }

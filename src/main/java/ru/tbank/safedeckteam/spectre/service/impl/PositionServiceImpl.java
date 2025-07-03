@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tbank.safedeckteam.spectre.dto.CreatedPositionDTO;
 import ru.tbank.safedeckteam.spectre.dto.PositionDTO;
 import ru.tbank.safedeckteam.spectre.dto.RenamedPositionDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.PositionMapper;
 import ru.tbank.safedeckteam.spectre.model.Position;
 import ru.tbank.safedeckteam.spectre.repository.PositionRepository;
@@ -28,7 +29,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDTO findPositionById(Long id) {
         return positionMapper.toDto(positionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Position not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found.")));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDTO renamePosition(RenamedPositionDTO dto, Long id) {
         Position position = positionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Position not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found."));
         position.setTitle(dto.getTitle());
         return positionMapper.toDto(positionRepository.save(position));
     }
@@ -49,7 +50,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDTO deletePosition(Long id) {
         Position position = positionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Position not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found."));
         positionRepository.delete(position);
         return positionMapper.toDto(position);
     }

@@ -32,7 +32,7 @@ public class PositionController {
                 .body(positionService.createPosition(createdPositionDTO));
     }
 
-    @PatchMapping("/{positionId}")
+    @PutMapping("/{positionId}")
     public ResponseEntity<PositionDTO> renamePosition(@RequestBody RenamedPositionDTO renamedPositionDTO,
                                                       @PathVariable Long positionId) {
         return ResponseEntity.ok(positionService.renamePosition(renamedPositionDTO, positionId));

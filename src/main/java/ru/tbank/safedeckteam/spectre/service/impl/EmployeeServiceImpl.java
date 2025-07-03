@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tbank.safedeckteam.spectre.dto.CreatedEmployeeDTO;
 import ru.tbank.safedeckteam.spectre.dto.EmployeeDTO;
 import ru.tbank.safedeckteam.spectre.dto.UpdatedEmployeeDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.EmployeeMapper;
 import ru.tbank.safedeckteam.spectre.model.Employee;
 import ru.tbank.safedeckteam.spectre.repository.EmployeeRepository;
@@ -28,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO findEmployeeById(Long id) {
         return employeeMapper.toDto(employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found.")));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO updateEmployee(UpdatedEmployeeDTO dto, Long id) {
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found."));
         employee.setEmail(dto.getEmail());
         employee.setBirthDate(dto.getBirthDate());
         employee.setFullName(dto.getFullName());
@@ -53,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDTO deleteEmployee(Long id) {
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found."));
         employeeRepository.delete(employee);
         return employeeMapper.toDto(employee);
     }

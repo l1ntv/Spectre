@@ -34,7 +34,7 @@ public class OrganizationController {
                 .body(organizationsService.createOrganization(organizationDTO));
     }
 
-    @PatchMapping("/{organizationId}")
+    @PutMapping("/{organizationId}")
     public ResponseEntity<OrganizationDTO> renameOrganization(@RequestBody RenamedOrganizationDTO organizationDTO,
                                                               @PathVariable Long organizationId) {
         return ResponseEntity.ok(organizationsService.renameOrganization(organizationDTO, organizationId));

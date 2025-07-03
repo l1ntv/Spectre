@@ -6,4 +6,5 @@ import ru.tbank.safedeckteam.spectre.model.AircraftType;
 
 @Mapper(componentModel = "spring")
 public interface AircraftTypeMapper extends Mappable<AircraftType, AircraftTypeDTO> {
+
 }

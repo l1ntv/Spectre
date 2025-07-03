@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.tbank.safedeckteam.spectre.dto.CreatedLocationDTO;
 import ru.tbank.safedeckteam.spectre.dto.LocationDTO;
 import ru.tbank.safedeckteam.spectre.dto.UpdatedLocationDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.LocationMapper;
 import ru.tbank.safedeckteam.spectre.model.Location;
 import ru.tbank.safedeckteam.spectre.repository.LocationRepository;
@@ -30,7 +31,7 @@ public class LocationServiceImpl implements LocationsService {
     @Override
     public LocationDTO findLocationById(Long id) {
         return locationMapper.toDto(locationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Location not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found.")));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class LocationServiceImpl implements LocationsService {
     @Override
     public LocationDTO updateLocation(UpdatedLocationDTO dto, Long id) {
         Location location = locationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Location not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found."));
         location.setName(dto.getName());
         location.setAddress(dto.getAddress());
         return locationMapper.toDto(locationRepository.save(location));
@@ -53,7 +54,7 @@ public class LocationServiceImpl implements LocationsService {
     @Override
     public LocationDTO deleteLocation(Long id) {
         Location location = locationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Location not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found"));
         locationRepository.delete(location);
         return locationMapper.toDto(location);
     }

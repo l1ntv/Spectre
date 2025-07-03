@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.tbank.safedeckteam.spectre.dto.AircraftTypeDTO;
 import ru.tbank.safedeckteam.spectre.dto.CreatedAircraftTypeDTO;
 import ru.tbank.safedeckteam.spectre.dto.RenamedAircraftTypeDTO;
+import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.AircraftTypeMapper;
 import ru.tbank.safedeckteam.spectre.model.AircraftType;
 import ru.tbank.safedeckteam.spectre.repository.AircraftTypeRepository;
@@ -28,7 +29,7 @@ public class AircraftTypeServiceImpl implements AircraftTypeService {
     @Override
     public AircraftTypeDTO findAircraftTypeById(Long id) {
         return aircraftTypeMapper.toDto(aircraftTypeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft type not found.")));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found.")));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class AircraftTypeServiceImpl implements AircraftTypeService {
     @Override
     public AircraftTypeDTO renameAircraftType(RenamedAircraftTypeDTO dto, Long id) {
         AircraftType aircraftType = aircraftTypeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft type not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found."));
         aircraftType.setName(dto.getNewName());
         return aircraftTypeMapper.toDto(aircraftTypeRepository.save(aircraftType));
     }
@@ -49,7 +50,7 @@ public class AircraftTypeServiceImpl implements AircraftTypeService {
     @Override
     public AircraftTypeDTO deleteAircraftType(Long id) {
         AircraftType aircraftType = aircraftTypeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft type not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found."));
         aircraftTypeRepository.delete(aircraftType);
         return aircraftTypeMapper.toDto(aircraftType);
     }
