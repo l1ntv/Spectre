@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.tbank.safedeckteam.spectre.dto.*;
+import ru.tbank.safedeckteam.spectre.service.AircraftTypeService;
 
 import java.util.List;
 
@@ -21,25 +22,24 @@ public class AircraftTypeController {
     }
 
     @GetMapping("/{aircraftTypeId}")
-    public ResponseEntity<PositionDTO> getAircraftType(@PathVariable Long aircraftTypeId) {
+    public ResponseEntity<AircraftTypeDTO> getAircraftType(@PathVariable Long aircraftTypeId) {
         return ResponseEntity.ok(aircraftTypeService.findAircraftTypeById(aircraftTypeId));
     }
 
     @PostMapping
-    public ResponseEntity<PositionDTO> createAircraftType(@RequestBody CreatedAircraftTypeDTO createdAircraftTypeDTO) {
+    public ResponseEntity<AircraftTypeDTO> createAircraftType(@RequestBody CreatedAircraftTypeDTO createdAircraftTypeDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(aircraftTypeService.createPosition(createdPositionDTO));
+                .body(aircraftTypeService.createAircraftType(createdAircraftTypeDTO));
     }
 
     @PatchMapping("/{aircraftTypeId}")
-    public ResponseEntity<PositionDTO> renamePosition(@RequestBody RenamedAircraftTypeDTO renamedAircraftTypeDTO,
-                                                      @PathVariable Long aircraftTypeId) {
-        return ResponseEntity.ok(aircraftTypeService.renamePosition(renamedPositionDTO, positionId));
+    public ResponseEntity<AircraftTypeDTO> renamePosition(@RequestBody RenamedAircraftTypeDTO renamedAircraftTypeDTO,
+                                                          @PathVariable Long aircraftTypeId) {
+        return ResponseEntity.ok(aircraftTypeService.renameAircraftType(renamedAircraftTypeDTO, aircraftTypeId));
     }
 
-    @DeleteMapping("/{positionId}")
-    public ResponseEntity<PositionDTO> deletePosition(@PathVariable Long positionId) {
-        return ResponseEntity.ok(aircraftTypeService.deletePosition(positionId));
+    @DeleteMapping("/{aircraftTypeId}")
+    public ResponseEntity<AircraftTypeDTO> deletePosition(@PathVariable Long aircraftTypeId) {
+        return ResponseEntity.ok(aircraftTypeService.deleteAircraftType(aircraftTypeId));
     }
-
 }
