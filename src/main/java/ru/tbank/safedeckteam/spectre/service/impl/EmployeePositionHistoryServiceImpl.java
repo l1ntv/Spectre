@@ -69,7 +69,7 @@ public class EmployeePositionHistoryServiceImpl implements EmployeePositionHisto
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found.")));
         employeePositionHistory.setPosition(positionRepository.findById(dto.getPosition().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found.")));
-        employeePositionHistory.setUnit(unitRepository.findById(dto.getPosition().getId())
+        employeePositionHistory.setUnit(unitRepository.findById(dto.getUnit().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Unit not found.")));
         employeePositionHistory.setStartDate(dto.getStartDate());
         employeePositionHistory.setEndDate(dto.getEndDate());
