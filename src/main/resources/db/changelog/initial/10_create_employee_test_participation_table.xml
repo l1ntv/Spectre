@@ -7,7 +7,7 @@
 
     <changeSet id="010-create-employee-test-participation-table" author="you">
         <createTable tableName="employee_test_participation">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="employee_id" type="BIGINT">

@@ -7,7 +7,7 @@
 
     <changeSet id="005-create-unit-table" author="you">
         <createTable tableName="unit">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="organization_id" type="BIGINT">

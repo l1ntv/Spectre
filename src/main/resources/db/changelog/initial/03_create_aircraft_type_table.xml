@@ -7,7 +7,7 @@
 
     <changeSet id="003-create-aircraft-type-table" author="you">
         <createTable tableName="aircraft_type">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)">

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/spectre
+    url: jdbc:postgresql://localhost:5431/spectre
     username: spectre
     password: spectre
     driver-class-name: org.postgresql.Driver

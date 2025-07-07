@@ -11,9 +11,9 @@ services:
       POSTGRES_USER: spectre
       POSTGRES_PASSWORD: spectre
     ports:
-      - "5432:5432"
+      - "5431:5431"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data5431
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "spectre"]
       interval: 5s

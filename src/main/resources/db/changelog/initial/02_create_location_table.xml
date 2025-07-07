@@ -7,7 +7,7 @@
 
     <changeSet id="002-create-location-table" author="you">
         <createTable tableName="location">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)">

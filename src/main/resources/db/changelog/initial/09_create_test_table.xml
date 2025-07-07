@@ -7,7 +7,7 @@
 
     <changeSet id="009-create-test-table" author="you">
         <createTable tableName="test">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="aircraft_id" type="BIGINT">

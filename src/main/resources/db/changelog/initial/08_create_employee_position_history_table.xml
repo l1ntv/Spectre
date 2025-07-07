@@ -7,7 +7,7 @@
 
     <changeSet id="008-create-employee-position-history-table" author="you">
         <createTable tableName="employee_position_history">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="employee_id" type="BIGINT">

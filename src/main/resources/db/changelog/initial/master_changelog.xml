@@ -16,4 +16,8 @@
     <include file="classpath:db/changelog/initial/09_create_test_table.xml"/>
     <include file="classpath:db/changelog/initial/10_create_employee_test_participation_table.xml"/>
 
+
+
+
+
 </databaseChangeLog>

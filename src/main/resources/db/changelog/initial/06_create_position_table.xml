@@ -7,7 +7,7 @@
 
     <changeSet id="006-create-position-table" author="you">
         <createTable tableName="position">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)">

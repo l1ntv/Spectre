@@ -7,7 +7,7 @@
 
     <changeSet id="007-create-employee-table" author="you">
         <createTable tableName="employee">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(255)">
