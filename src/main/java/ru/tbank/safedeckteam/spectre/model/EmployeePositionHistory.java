@@ -33,6 +33,6 @@ public class EmployeePositionHistory {
     @Column(nullable = false)
     private LocalDate startDate;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate endDate;
 }
