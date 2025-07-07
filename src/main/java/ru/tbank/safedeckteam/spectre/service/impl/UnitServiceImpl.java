@@ -62,7 +62,17 @@ public class UnitServiceImpl implements UnitService {
     public UnitDTO deleteUnit(Long id) {
         Unit unit = unitRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Unit not found."));
-
+        List<Unit> possibleChildren = unitRepository.findAllByParentUnit(unit);
+        Unit parent = null;
+        if (unit.getParentUnit() != null)
+            parent = unit.getParentUnit();
+        for (Unit child : possibleChildren) {
+            if (parent != null)
+                child.setParentUnit(parent);
+            else
+                child.setParentUnit(null);
+            unitRepository.save(child);
+        }
         unitRepository.delete(unit);
         return unitMapper.toDto(unit);
     }
