@@ -13,5 +13,5 @@ public class AircraftDTO {
 
     private String manufacturer;
 
-    private AircraftDTO aircraftType;
+    private AircraftTypeDTO aircraftType;
 }

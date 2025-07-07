@@ -8,6 +8,7 @@ import ru.tbank.safedeckteam.spectre.dto.UpdatedAircraftDTO;
 import ru.tbank.safedeckteam.spectre.exception.ResourceNotFoundException;
 import ru.tbank.safedeckteam.spectre.mapper.AircraftMapper;
 import ru.tbank.safedeckteam.spectre.model.Aircraft;
+import ru.tbank.safedeckteam.spectre.model.AircraftType;
 import ru.tbank.safedeckteam.spectre.repository.AircraftRepository;
 import ru.tbank.safedeckteam.spectre.repository.AircraftTypeRepository;
 import ru.tbank.safedeckteam.spectre.service.AircraftService;
@@ -37,12 +38,14 @@ public class AircraftServiceImpl implements AircraftService {
 
     @Override
     public AircraftDTO createAircraft(CreatedAircraftDTO dto) {
+        AircraftType aircraftType = aircraftTypeRepository.findById(dto.getAircraftType().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found."));
+
         return aircraftMapper.toDto(aircraftRepository.save(Aircraft.builder()
                 .modelName(dto.getModelName())
                 .description(dto.getDescription())
                 .manufacturer(dto.getManufacturer())
-                .type(aircraftTypeRepository.findById(dto.getAircraftType().getId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Aircraft type not found.")))
+                .type(aircraftType)
                 .build()));
     }
 
