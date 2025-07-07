@@ -39,7 +39,7 @@ public class UnitServiceImpl implements UnitService {
     public UnitDTO createUnit(CreatedUnitDTO dto) {
         return unitMapper.toDto(unitRepository.save(Unit.builder()
                 .name(dto.getName())
-                .parentUnit(unitRepository.findById(dto.getParent().getId())
+                .parentUnit(dto.getParent() == null ? null : unitRepository.findById(dto.getParent().getId())
                         .orElseThrow(() -> new ResourceNotFoundException("Parent unit not found.")))
                 .organization(organizationRepository.findById(dto.getOrganization().getId())
                         .orElseThrow(() -> new ResourceNotFoundException("Organization not found.")))
@@ -51,7 +51,7 @@ public class UnitServiceImpl implements UnitService {
         Unit unit = unitRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Unit not found."));
         unit.setName(dto.getName());
-        unit.setParentUnit(unitRepository.findById(dto.getParent().getId())
+        unit.setParentUnit(dto.getParent() == null ? null : unitRepository.findById(dto.getParent().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Parent unit not found.")));
         unit.setOrganization(organizationRepository.findById(dto.getOrganization().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Organization not found.")));
@@ -62,6 +62,7 @@ public class UnitServiceImpl implements UnitService {
     public UnitDTO deleteUnit(Long id) {
         Unit unit = unitRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Unit not found."));
+
         unitRepository.delete(unit);
         return unitMapper.toDto(unit);
     }
