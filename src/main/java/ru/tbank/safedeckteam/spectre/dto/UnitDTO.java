@@ -9,7 +9,7 @@ public class UnitDTO {
 
     private OrganizationDTO organization;
 
-    private UnitDTO parent;
+    private UnitDTO parentUnit;
 
     private String name;
 }

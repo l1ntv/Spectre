@@ -11,6 +11,8 @@ public class TestDTO {
 
     private OrganizationDTO organization;
 
+    private AircraftDTO aircraft;
+
     private LocationDTO location;
 
     private LocalDate date;
