@@ -52,7 +52,7 @@ public class EmployeePositionHistoryServiceImpl implements EmployeePositionHisto
                                         .orElseThrow(() -> new ResourceNotFoundException("Employee not found.")))
                                 .position(positionRepository.findById(dto.getPosition().getId())
                                         .orElseThrow(() -> new ResourceNotFoundException("Position not found.")))
-                                .unit(unitRepository.findById(dto.getPosition().getId())
+                                .unit(unitRepository.findById(dto.getUnit().getId())
                                         .orElseThrow(() -> new ResourceNotFoundException("Unit not found.")))
                                 .startDate(dto.getStartDate())
                                 .endDate(dto.getEndDate())
