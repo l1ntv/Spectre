@@ -56,11 +56,7 @@ public class ReportServiceImpl implements ReportService {
 
         for (Test test : tests) {
             for (EmployeeTestParticipation participation : test.getParticipations()) {
-                Employee employee = participation.getEmployee();
-
-                if (belongsToOrganization(employee, organization)) {
-                    result.add(employeeTestParticipationMapper.toDto(participation));
-                }
+                result.add(employeeTestParticipationMapper.toDto(participation));
             }
         }
 
